@@ -1,0 +1,28 @@
+{
+  "generator-angularjs-library": {
+    "props": {
+      "author": {
+        "name": "CloudNiner",
+        "email": "andrew.fink.11@gmail.com"
+      },
+      "libraryName": {
+        "original": "azGeocoder",
+        "camelized": "azGeocoder",
+        "dasherized": "az-geocoder",
+        "slugified": "azgeocoder",
+        "parts": [
+          "azgeocoder"
+        ]
+      },
+      "includeModuleDirectives": false,
+      "includeModuleFilters": false,
+      "includeModuleServices": false,
+      "includeAngularModuleResource": false,
+      "includeAngularModuleCookies": false,
+      "includeAngularModuleSanitize": false,
+      "librarySrcDirectory": "src/az-geocoder",
+      "libraryUnitTestDirectory": "test/unit/az-geocoder",
+      "libraryUnitE2eDirectory": "test/e2e/az-geocoder"
+    }
+  }
+}
