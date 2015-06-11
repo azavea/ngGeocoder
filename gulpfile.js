@@ -100,6 +100,10 @@ gulp.task('test-dist-minified', function (done) {
   }, done);
 });
 
+gulp.task('test', function () {
+    runSequence('process-all', 'test-dist-concatenated', 'test-dist-minified');
+});
+
 gulp.task('default', function () {
   runSequence('process-all', 'watch');
 });
