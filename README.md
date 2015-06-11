@@ -1,5 +1,7 @@
 # Geocoder Abstraction Library
 
+[![Build Status](https://travis-ci.org/azavea/ngGeocoder.svg?branch=master)](https://travis-ci.org/azavea/ngGeocoder)
+
 A geocoder abstraction layer for Angular. Supports the following geocoders:
   - None
 
