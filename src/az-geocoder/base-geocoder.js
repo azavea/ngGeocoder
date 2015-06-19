@@ -71,13 +71,14 @@
             throw 'Abstract. Each Geocoder implementation must have a postprocessor function';
         }
 
-        function BaseGeocoder(options) {
+        function BaseGeocoder(options) {}
+        BaseGeocoder.prototype.setOptions = function setOptions(options) {
             this.options = angular.extend({}, defaults, options);
 
             if (!this.options.url) {
                 throw 'Geocoder url required';
             }
-        }
+        };
 
         /**
          * Geocode a text address

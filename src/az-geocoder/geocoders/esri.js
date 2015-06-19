@@ -42,7 +42,8 @@
             postprocessors: [resultsPostprocessor, esriPostprocessor]
         };
 
-        var esriGeocoder = new BaseGeocoder(options);
+        var esriGeocoder = new BaseGeocoder();
+        esriGeocoder.setOptions(options);
         return esriGeocoder;
     }
 
