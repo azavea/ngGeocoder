@@ -9,8 +9,9 @@
         $scope.onGeocodeSubmit = onGeocodeSubmit;
 
         function onGeocodeSubmit() {
-            ESRIGeocoder.geocode($scope.form.geocodeText)
-            .then(function (locations) {
+            ESRIGeocoder.geocode($scope.form.geocodeText, {
+                limit: 10
+            }).then(function (locations) {
                 $log.info(locations);
                 $scope.locations = locations;
             }).catch(function (error) {
