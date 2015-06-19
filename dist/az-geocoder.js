@@ -62,6 +62,7 @@
         var defaults = {
             key: null,
             url: null,
+            textParam: 'text',
             optionsPreprocessors: [defaultOptionsPreprocessor],
             addressPreprocessors: [defaultAddressPreprocessor],
             postprocessors: [defaultPostprocessor]
@@ -98,7 +99,6 @@
          * @return {$q.deferred}                Promise object resolved with an Array of GeocoderResult objects
          */
         BaseGeocoder.prototype.geocode = function geocode(text, options, addtlOptions) {
-            var dfd = $q.defer();
             var self = this;
 
             var addressText = text;
@@ -106,24 +106,35 @@
                 addressText = addressPPFunc.call(self, addressText);
             });
 
-            var params = {
-                text: addressText
-            };
+            var params = angular.extend({}, options, addtlOptions);
             angular.forEach(this.options.optionsPreprocessors, function (optionsPPFunc) {
                 angular.extend(params, optionsPPFunc.call(self, params));
             });
+            params[this.options.textParam] = addressText;
+
+            return this._request(addressText, params);
+        };
+
+        BaseGeocoder.prototype._request = function _request(text, params) {
+            var dfd = $q.defer();
+            var self = this;
 
             $http.get(this.options.url, {
                 params: params,
             }).then(function (response) {
-                angular.forEach(self.options.postprocessors, function (postProcess) {
-                    response = postProcess.call(self, response);
-                });
-                dfd.resolve(response);
+                dfd.resolve(self._successCallback(response));
             }).catch(function (error) {
                 dfd.reject(error);
             });
             return dfd.promise;
+        };
+
+        BaseGeocoder.prototype._successCallback = function _successCallback(response) {
+            var self = this;
+            angular.forEach(this.options.postprocessors, function (postProcess) {
+                response = postProcess.call(self, response);
+            });
+            return response;
         };
 
         return BaseGeocoder;
